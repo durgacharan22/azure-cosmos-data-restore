@@ -1,0 +1,35 @@
+# Node.js dependencies
+node_modules/
+
+# Client-side build artifacts (e.g., React build output)
+/build/
+/dist/
+/public/
+
+# Server-side build artifacts (e.g., transpiled code, compiled binaries)
+/build/
+/out/
+/.nyc_output/
+/.next/
+/.webpack/
+
+# Environment variables (if applicable)
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Log files
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor-specific files and directories
+.vscode/
+.idea/
+
+# OS-specific files and directories
+.DS_Store
+Thumbs.db
