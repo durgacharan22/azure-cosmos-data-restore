@@ -17,7 +17,7 @@ class Home extends Component {
     this.setState({ [name]: value });
   };
 
-  handleApiCall = () => {
+  getContainerdetails = () => {
     const { connectionString, databaseId } = this.state;
     this.setState({ isLoading: true, error: null });
 
@@ -31,7 +31,7 @@ class Home extends Component {
     })
       .then((response) => response.json())
       .then((data) => {
-        this.setState({ response: data, isLoading: false });
+        this.setState({ response: data.containerDetails, isLoading: false });
       })
       .catch((error) => {
         this.setState({ error: "API call error", isLoading: false });
@@ -75,23 +75,34 @@ class Home extends Component {
         <div className="mb-3">
           <button
             className="btn btn-primary"
-            onClick={this.handleApiCall}
+            onClick={this.getContainerdetails}
             disabled={isLoading}
           >
-            {isLoading ? "Loading..." : "Make API Call"}
+            {isLoading ? "Loading..." : "Get Info"}
           </button>
         </div>
         {error && <p className="text-danger">Error: {error}</p>}
         {response && (
-          <div>
-            <h3 className="mt-4">API Response:</h3>
-            <ul>
-              {response.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+      <div>
+        <h3 className="mt-4">Container Details:</h3>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Container ID</th>
+              <th>Partition Key</th>
+            </tr>
+          </thead>
+          <tbody>
+            {response.map((item, index) => (
+              <tr key={index}>
+                <td>{item.containerId}</td>
+                <td>{item.partitionKey.join(", ")}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
       </div>
     );
   }
