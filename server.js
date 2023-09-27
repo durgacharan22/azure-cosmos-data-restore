@@ -1,6 +1,7 @@
 // server.js
 const express = require("express");
-const {listContainersAndPartitionKeys} = require('./server/getContainerDetails')
+const {listContainersAndPartitionKeys} = require('./server/getContainerDetails');
+const {restore} = require('./server/restore')
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -17,6 +18,16 @@ app.post("/api/getContainerDetails", async (req, res) => {
   try {
     const result = await listContainersAndPartitionKeys(req.body.connectionString, req.body.databaseId);
     res.json({ success: true, containerDetails: result });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
+
+app.post("/api/restoreContainer", async (req, res) => {
+  try {
+    const result = await restore(req.body);
+    res.json({ success: true, result });
   } catch (error) {
     console.error('Error:', error);
     res.status(500).json({ success: false, error: 'Internal Server Error' });
