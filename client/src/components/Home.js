@@ -43,7 +43,7 @@ class Home extends Component {
         console.error("API call error:", error);
       });
   };
-  
+
   handleExpandRow = (index) => {
     this.setState({ expandedRow: index });
   };
@@ -113,7 +113,7 @@ class Home extends Component {
 
     return (
       <div className="container mt-5">
-        <h2 className="mb-4">API Call Component</h2>
+        <h2 className="mb-4">Cosmos Restore Tool</h2>
         <div className="mb-3">
           <label htmlFor="connectionString" className="form-label">
             Connection String:
